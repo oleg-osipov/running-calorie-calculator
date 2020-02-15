@@ -1,0 +1,12 @@
+// @import "~bootstrap/scss/bootstrap"; //importing bootstrap from node_modules
+html,
+body,
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; //box-sizing
+}
+
+body {
+  background-color: salmon;
+}
