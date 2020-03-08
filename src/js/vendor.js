@@ -1,4 +1,2 @@
-import 'bootstrap';
-
-let myVar = 'Webpack';
-console.log(myVar);
+import 'bootstrap'; //import bootstrap js files
+import symbol from '../assets/imgs/icon_sprite.svg';

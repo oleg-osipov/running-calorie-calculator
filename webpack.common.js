@@ -1,4 +1,5 @@
 const path = require('path');
+const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 
 module.exports = {
   entry: { vendor: './src/js/vendor.js', main: './src/js/index.js' },
@@ -10,10 +11,10 @@ module.exports = {
         test: /\.m?js$/,
         exclude: /(node_modules|bower_components)/,
         use: {
-          loader: 'babel-loader'
-          // options: {
-          //   presets: ['@babel/preset-env']
-          // }
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env']
+          }
         }
       },
 
@@ -25,15 +26,35 @@ module.exports = {
 
       //IMAGES file-loader
       {
-        test: /\.(png|jpg|svg|gif)$/,
+        test: /\.(png|jpg|gif)$/,
         use: {
           loader: 'file-loader',
           options: {
-            name: '[name].[hash].[ext]',
+            name: '[name].[ext]',
             outputPath: 'imgs'
           }
         }
+      },
+      //SPRITE_IMAGES
+      {
+        test: /\.svg$/i,
+
+        use: [
+          {
+            loader: 'svg-sprite-loader',
+            options: {
+              publicPath: './app'
+            }
+          },
+          {
+            loader: 'svgo-loader',
+            options: {
+              plugins: [{ cleanupIDs: false }]
+            }
+          }
+        ]
       }
     ]
-  }
+  },
+  plugins: [new SpriteLoaderPlugin()]
 };

@@ -1,0 +1,41 @@
+@mixin transition {
+  transition: all 150ms ease-in;
+}
+
+//ranges-lider thumb
+@mixin indicator($w, $h) {
+  cursor: pointer;
+  width: $w;
+  height: $h;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #cbcfd4, #f1f6fb);
+  box-shadow: 2px 2px 4px #c6cacf, -2px -2px 4px #fcffff;
+  border: 2px solid rgba(#c6cacf, 0.5);
+}
+
+@mixin range-thumb-hover($w, $h) {
+  width: $w;
+  height: $h;
+  border-radius: 50%;
+  background: linear-gradient(
+    145deg,
+    lighten(#c4c8cc, 3%),
+    lighten(#dde4eb, 3%)
+  );
+  border: 2px solid rgba(#c6cacf, 0.5);
+  @include transition;
+}
+
+//renge-slider track
+@mixin range-track {
+  border-radius: 1rem;
+  // background: #e1e6eb;
+  background: linear-gradient(
+    90deg,
+    rgba($slow, 0.4) 0%,
+    rgba($moderate, 0.5) 50%,
+    rgba($fast, 0.6) 100%
+  );
+  box-shadow: inset 5px 5px 7px #c8cdd1, inset -5px -5px 7px #faffff;
+  @include transition();
+}

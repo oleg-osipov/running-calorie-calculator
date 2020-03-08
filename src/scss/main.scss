@@ -1,12 +1,5 @@
-// @import "~bootstrap/scss/bootstrap"; //importing bootstrap from node_modules
-html,
-body,
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box; //box-sizing
-}
-
-body {
-  background-color: salmon;
-}
+@import '~bootstrap/scss/bootstrap'; //importing bootstrap from node_modules
+@import 'custom-variables';
+@import 'mixins';
+@import './components/components';
+@import 'layout';

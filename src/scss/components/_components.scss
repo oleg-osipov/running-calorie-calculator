@@ -1,0 +1,497 @@
+//card
+.neumorphic-card {
+  padding: 2.5rem;
+  box-shadow: 0.8rem 1rem 2.4rem $c-grey-darker-7,
+    -0.8rem -0.8rem 2.4rem $c-grey-lighter-8,
+    -0.2rem -0.2rem 0.2rem $c-grey-lighter-8;
+  border-radius: 2rem;
+}
+
+//inputs
+.neumorphic-input-field {
+  width: 5rem;
+  background-color: transparent;
+  border-radius: 10px;
+  border: 2px solid rgba($c-grey-darker-5, 1);
+  box-shadow: 2px 2px 3px rgba($c-grey-darker-50, 0.2),
+    inset 0px 0px 4px rgba(255, 255, 255, 0.3),
+    inset 7px 7px 15px rgba(55, 84, 170, 0.15),
+    inset -7px -7px 20px rgb(241, 241, 241),
+    0px 0px 4px rgba(255, 255, 255, 0.8);
+  padding: 0.4rem 1rem;
+  outline: none;
+  color: $f-color-main-darker;
+  text-align: center;
+}
+
+//highlight input filds that contain invalid values
+.neumorphic-input-field.invalid {
+  border: 2px solid rgba($alert, 0.3);
+}
+
+//hide hightligts when option "running marathon" is on
+.neumorphic-input-field[disabled] {
+  border-color: rgba($c-grey-darker-5, 1);
+}
+
+.neumorphic-input-field[disabled] ~ .validation-error-container {
+  opacity: 0;
+}
+.neumorphic-input-field ~ .validation-error-container {
+  opacity: 1;
+}
+
+//disabled input filds
+.disabled {
+  color: $f-color-main-lighter;
+  opacity: 0.5;
+}
+
+//BUTTON
+.button-container {
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 5rem;
+  margin-top: 2rem;
+  flex-basis: 100%;
+  font-size: 1.3rem;
+
+  &:active,
+  &:focus {
+    outline: 0;
+  }
+
+  //center properly txt
+  span {
+    margin-left: 1rem;
+    padding-bottom: 0.2rem;
+  }
+}
+
+.neumorphic-button {
+  display: flex;
+  height: 4rem;
+  width: 12rem;
+  padding: 1rem 2rem;
+  align-items: center;
+  justify-content: center;
+  color: desaturate($f-color-main-lighter, 10%);
+  border-radius: $button-border-radius;
+  border: 0;
+  background: transparent;
+  position: relative;
+  box-shadow: 0.8rem 0.8rem 2rem $c-grey-darker-5,
+    -0.8rem -0.8rem 1.5rem $c-grey-lighter-8,
+    -0.2rem -0.2rem 0.2rem $c-grey-lighter-8;
+  @include transition;
+
+  //icon color
+  .icon {
+    fill: desaturate($f-color-main-lighter, 30%);
+  }
+
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    border-radius: $button-border-radius;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    @include transition;
+  }
+  &:before {
+    border: 2px solid transparent;
+    filter: blur(2px);
+  }
+
+  //hover
+  &:hover {
+    &:before,
+    .icon {
+      background: $button-hover;
+    }
+    @include transition;
+  }
+
+  //push button
+  &:active,
+  &:focus {
+    background: linear-gradient(to top, $c-grey-darker-5, $c-grey-lighter-5);
+    box-shadow: inset 0.2rem 0.2rem 0.8rem $c-grey-darker-20,
+      inset 0.8rem 0.8rem 1.6rem $c-grey-darker-15,
+      inset -0.4rem -0.4rem 0.8rem $flat, 2px 2px 8px $c-grey-darker-20,
+      -2px -2px 2px $button-light;
+    &:before {
+      border-color: white;
+      box-shadow: 0px 0.4rem 1.6rem rgba($flat, 0.5);
+    }
+    &:after {
+      box-shadow: inset 0px 0px 1.6rem rgba($flat, 0.5);
+    }
+
+    .icon-cogs,
+    .icon-cogs + span {
+      color: $purple;
+      fill: $purple;
+    }
+    .icon-floppy-save,
+    .icon-floppy-save + span {
+      color: $green;
+      fill: $green;
+    }
+
+    .icon-trash-bin,
+    .icon-trash-bin + span {
+      color: $red;
+      fill: $red;
+    }
+    @include transition;
+  }
+}
+
+//TOGGLE-SWITCH
+.neumorphic-toggle-switch {
+  &--container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  //toggle button
+  &--button {
+    position: relative;
+    width: 4rem;
+    height: $buttonHeight;
+    display: inline-block;
+    border-radius: 1.25rem;
+    background: linear-gradient(145deg, #f1f6fb, #cbcfd4);
+    box-shadow: inset 5px 5px 7px #c8cdd1, inset -5px -5px 7px #faffff;
+    cursor: pointer;
+
+    input {
+      display: none;
+
+      &:checked + div {
+        transform: translateX(-100%);
+        transition: transform 0.1s linear;
+      }
+    }
+
+    &:hover div {
+      @include range-thumb-hover($indicatorWidth, $indicatorHeight);
+    }
+  }
+
+  //toggle switch indicator
+  &--indicator {
+    position: absolute;
+    right: 0;
+    transform: translateX(0);
+    transition: transform 0.1s linear;
+    cursor: pointer;
+
+    @include indicator($indicatorWidth, $indicatorHeight);
+  }
+}
+
+//genders
+.gender {
+  &--male,
+  &--female {
+    cursor: default;
+    font-size: 1.3rem;
+    width: 5rem;
+    display: flex;
+    align-items: center;
+    position: relative;
+    justify-content: space-between;
+  }
+
+  &--male {
+    margin-right: 1.2rem;
+  }
+  &--female {
+    margin-left: 1.2rem;
+  }
+
+  //gender symbols - mars$venus
+  &--symbol {
+    fill: #595a5c;
+    transition: fill 0.1s linear;
+
+    &.female {
+      position: absolute;
+      right: -0.5rem;
+    }
+
+    &.active {
+      fill: $red;
+      transition: fill 0.1s linear;
+    }
+  }
+}
+
+//RANGE SLIDER
+.slider-container {
+  max-width: 28rem;
+  width: 100%;
+}
+
+//resetting default styles
+input[type='range'] {
+  -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+  width: 100%; /* Specific width is required for Firefox. */
+  background: transparent; /* Otherwise white in Chrome */
+}
+
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+}
+
+input[type='range']:focus {
+  outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+}
+
+input[type='range']::-ms-track {
+  width: 100%;
+  cursor: pointer;
+  /* Hides the slider so custom styles can be added */
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+
+.range-slider {
+  position: relative;
+  //thumb styling
+  &::-webkit-slider-thumb {
+    @include indicator($thumb-width, $thumb-height);
+    -webkit-appearance: none;
+    appearance: none;
+    margin-top: 1px;
+  }
+  &::-moz-range-thumb {
+    @include indicator($thumb-width, $thumb-height);
+  }
+  &::-ms-thumb {
+    @include indicator($thumb-width, $thumb-height);
+  }
+
+  //range-track
+  /* The slider itself */
+  &::-webkit-slider-runnable-track {
+    width: $slider-track-width;
+    height: $thumb-height;
+    cursor: pointer;
+    @include range-track;
+  }
+
+  &:focus::-webkit-slider-runnable-track {
+    outline: none;
+    border: none;
+  }
+
+  &:hover::-webkit-slider-thumb {
+    @include range-thumb-hover($thumb-width, $thumb-height);
+  }
+  &:hover::-moz-range-thumb {
+    @include range-thumb-hover($thumb-width, $thumb-height);
+  }
+  &:hover::-ms-thumb {
+    @include range-thumb-hover($thumb-width, $thumb-height);
+  }
+
+  &::-moz-range-track {
+    width: $slider-track-width;
+    height: $slider-track-height;
+    cursor: pointer;
+    @include range-track;
+  }
+
+  //running speed info container
+  &--value-container {
+    margin-top: 3rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &--value-info {
+    display: inline-flex;
+    width: 4rem;
+    margin: 0;
+  }
+
+  &--value {
+    display: inline-flex;
+    width: 3.5rem;
+    justify-content: center;
+    background-color: transparent;
+    border-radius: 10px;
+    border: 2px solid rgba($c-grey-darker-5, 1);
+    box-shadow: 2px 2px 3px rgba($c-grey-darker-50, 0.2),
+      inset 0px 0px 4px rgba(255, 255, 255, 0.3),
+      inset 7px 7px 15px rgba(55, 84, 170, 0.15),
+      inset -7px -7px 20px rgb(241, 241, 241),
+      0px 0px 4px rgba(255, 255, 255, 0.8);
+    padding: 0.4rem 0.5rem;
+    color: $f-color-main-darker;
+    margin: 0 1rem;
+  }
+}
+
+//CHECKBOX - MARATHON RUNNING
+.marathon-running-checkbox {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  //label
+  .neumorphic-checkbox--txt {
+    display: flex;
+    width: auto;
+    position: relative;
+    cursor: pointer;
+    span {
+      margin-left: 3rem;
+    }
+  }
+}
+
+.neumorphic-checkbox {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  width: 1.6rem; //----------------//var here
+  height: 1.6rem;
+  border-radius: 8px;
+  background: #e1e6eb;
+  box-shadow: 6px 6px 12px #d1d6db, -6px -6px 12px #f1f6fb;
+
+  &:hover {
+    background: darken(#e1e6eb, 1%);
+    box-shadow: 6px 6px 12px #d1d6db, -6px -6px 12px #f7fafd;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  //checked
+  &:checked {
+    border-radius: 8px;
+    border: 1px solid darken(#e1e6eb, 1%);
+    box-shadow: -6px -6px 8px 0px rgba(#f5f5f5, 0.8), 6px 4px 12px 0px #dbe0e9,
+      4px 4px 4px 0px #e3e9f3 inset, -4px -4px 4px 0px rgba(#f5f5f5, 0.6) inset;
+  }
+
+  &:checked:hover {
+    background: transparent;
+  }
+  &:checked + .check-icon svg path {
+    fill: transparentize($red, 0.1);
+  }
+}
+
+//check sign on chechbox button
+.check-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 1.6rem; //----------------//var here
+  height: 1.6rem;
+  //unchecked
+  svg {
+    width: 1rem; //--------------//var here
+    height: 1rem;
+    path {
+      fill: transparent;
+      transition: fill 0.15s ease-in;
+    }
+  }
+}
+
+//ERRORS CONTAINER
+.validation-error-container {
+  max-width: 100%;
+  width: 100%;
+  height: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  span[class^='validation-error--'] {
+    line-height: 1;
+    font-size: 14px;
+    margin: 0.5rem 0;
+    display: block;
+    color: transparentize($red, 0.1);
+  }
+}
+
+//TOOLTIP
+//pseudo-tooltip styles
+[data-title] {
+  position: relative;
+  cursor: pointer;
+}
+[data-title]:after {
+  content: attr(data-title);
+  position: absolute;
+  top: -110%;
+  left: 100%;
+  background-color: $c-grey-lighter-8;
+  padding: 2px 5px;
+  white-space: nowrap;
+  opacity: 0;
+  border-radius: 0.3rem;
+  border: 2px solid rgba($c-grey-darker-15, 1);
+  box-shadow: 2px 2px 3px rgba($c-grey-darker-50, 0.2),
+    inset 0px 0px 4px rgba(255, 255, 255, 0.3),
+    inset 7px 7px 15px rgba(55, 84, 170, 0.15),
+    inset -7px -7px 20px rgb(241, 241, 241),
+    0px 0px 4px rgba(255, 255, 255, 0.8);
+  text-align: center;
+  z-index: 99999;
+  visibility: hidden;
+  font-size: 95%;
+}
+[data-title]:hover:after {
+  visibility: visible;
+  opacity: 1;
+  transition: all 0.15s ease-in;
+}
+
+//MEDIAQUERIES
+
+@include media-breakpoint-up(sm) {
+  .neumorphic-card {
+    padding: 3rem;
+  }
+  .button-container {
+    flex-basis: 45%;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  .button-container {
+    flex-basis: 33.333%;
+    margin-top: 0;
+  }
+}

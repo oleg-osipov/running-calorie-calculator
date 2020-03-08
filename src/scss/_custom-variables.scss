@@ -1,0 +1,60 @@
+//COLORS
+$c-grey: #e1e6eb; //original color
+$c-grey: #e7ebf0; //test
+//grey-light
+$c-grey-lighter-5: lighten($c-grey, 5%);
+$c-grey-lighter-8: lighten($c-grey, 8%);
+$c-grey-lighter-20: lighten($c-grey, 20%);
+$c-grey-lighter-50: lighten($c-grey, 50%);
+//grey-dark
+$c-grey-darker-5: darken($c-grey, 5%);
+$c-grey-darker-7: darken($c-grey, 7%);
+$c-grey-darker-15: darken($c-grey, 15%);
+$c-grey-darker-20: darken($c-grey, 20%);
+$c-grey-darker-50: darken($c-grey, 50%);
+
+//links
+$c-link: rgba(161, 73, 39, 0.76);
+$c-link-hover: rgb(92, 85, 182);
+
+//font-color
+$f-color-main: rgb(97, 96, 96);
+$f-color-main-darker: darken($f-color-main, 50%);
+$f-color-main-lighter: lighten($f-color-main, 5%);
+
+//border radius - buttons
+$button-border-radius: 1.2rem;
+
+//color buttons
+$flat: rgba(white, 1);
+$button-light: transparentize($c-grey-lighter-20, 0.3);
+$button-hover: transparentize($flat, 0.7);
+$light-grey: #e7eef7;
+
+//input filds
+$alert: rgb(243, 66, 19);
+
+//color button:active
+$red: #f56666;
+$green: #48bb78;
+$purple: #9f7aea;
+
+//OTHER VARIABLES
+
+//ranges-slider thumb
+$thumb-height: 1.7rem;
+$thumb-width: 1.7rem;
+
+//range-slider track
+$slider-track-height: 2rem;
+$slider-track-width: 100%;
+
+//range-slider track color
+$slow: rgb(175, 249, 191);
+$moderate: rgb(54, 177, 117);
+$fast: $alert;
+
+//toggle botton "genders"
+$buttonHeight: 2rem;
+$indicatorWidth: 2rem;
+$indicatorHeight: $buttonHeight;

@@ -1,0 +1,141 @@
+body {
+  width: 100%;
+  color: $f-color-main;
+  background-color: $c-grey;
+}
+
+.hero {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-title {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 8rem;
+  max-height: 8rem;
+}
+
+.data-section {
+  padding: 2rem 0;
+}
+.data-section > div:first-child {
+  margin-bottom: 2rem;
+}
+.section--body-parameters,
+.section--exercise {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100%;
+  height: 100%;
+}
+
+.exercise-info-block {
+  margin-top: 2rem;
+
+  p {
+    margin: 0;
+  }
+
+  a {
+    color: $c-link;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  a:hover {
+    color: $c-link-hover;
+  }
+}
+.data-unit,
+.section--exercise > div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 0;
+
+  label {
+    display: inline-flex;
+    width: 4rem;
+    margin: 0;
+  }
+
+  // input ~ span,
+  // input ~ div {
+  //   cursor: default;
+  // }
+}
+
+//error-message container
+div[class^='container--'] {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+//spans that shows metric units as cm, min, km/h...
+.metric-unit {
+  display: inline-flex;
+  max-width: 3.5rem;
+  width: 3rem;
+  margin-left: 1rem;
+}
+
+.section-compute {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 0;
+}
+
+//Style icons
+.icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+
+/* ==========================================
+Single-colored icons can be modified like so:
+.icon-name {
+  font-size: 32px;
+  color: red;
+}
+========================================== */
+
+.icon-cogs {
+  width: 1.0712890625em;
+}
+
+.icon-floppy-save {
+  width: 0.857421875em;
+}
+
+.icon-trash-bin {
+  width: 0.7861328125em;
+}
+
+.icon-mars {
+  width: 0.857421875em;
+}
+
+.icon-venus {
+  width: 0.6298828125em;
+}
+
+@include media-breakpoint-up(lg) {
+  .data-section > div:first-child {
+    margin-bottom: 0;
+  }
+}
