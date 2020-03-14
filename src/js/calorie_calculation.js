@@ -1,5 +1,6 @@
 import validateInputData from './validation.js';
 import { rangeSliderInstance } from './range_slider.js';
+import { displayCalculationResults } from './showup_results.js';
 
 export default function processData() {
   const form = document.getElementById('calcForm');
@@ -17,22 +18,19 @@ export default function processData() {
     switch (event.target.id) {
       case calculateButton.id: {
         if (validateForm() === true) {
-          console.log('yes');
           calculateCalories();
+          activateButtonStore();
+          // displayCalculationResults();
         }
-        console.log(event.target.id + ' is clicked');
         break;
       }
       case saveButton.id: {
         if (validateForm() === true) {
           storeData();
         }
-        console.log(event.target.id + ' is clicked');
         break;
       }
-
       case clearButton.id: {
-        console.log(event.target.id + ' is clicked');
         resetForm();
         break;
       }
@@ -74,7 +72,6 @@ export default function processData() {
         this.value2 * this.weight +
         this.value3 * this.height -
         this.value4 * this.age;
-      console.log('BMR  - ' + BMRvalue);
       return BMRvalue;
     }
 
@@ -99,10 +96,10 @@ export default function processData() {
         Math.round((BMR * this.metValue) / 24) * (this.excersizeDuration / 60);
 
       return {
-        BMRvalue: Math.round(BMR),
-        distance: estimatedDistance.toFixed(3),
-        energie: Math.round(spentEnergie),
-        METtotal: estimatedTotalMETvalue.toFixed(2)
+        'BMR-value': `${Math.round(BMR)}kcal`,
+        'Estimated distance': `${estimatedDistance.toFixed(3)}km`,
+        'Burned energie': `${Math.round(spentEnergie)}kcal`,
+        'MET(total)': `${estimatedTotalMETvalue.toFixed(2)}mets`
       };
     }
 
@@ -141,10 +138,10 @@ export default function processData() {
         ((BMR * marathonMetValue) / 24) * (estimatedTime / 60)
       );
       return {
-        BMRvalue: Math.round(BMR),
-        time: estimatedTime.toFixed(2),
-        energie: Math.round(spentEnergie),
-        METtotal: estimatedTotalMETvalueMarathon.toFixed(2)
+        'BMR-value': `${Math.round(BMR)}kcal`,
+        'Estimated time': `${estimatedTime.toFixed(2)}min`,
+        'Burned energie': `${Math.round(spentEnergie)}kcal`,
+        'MET(total)': `${estimatedTotalMETvalueMarathon.toFixed(2)}mets`
       };
     }
   }
@@ -199,24 +196,33 @@ export default function processData() {
 
     //Run the footrace
     function runMarathon() {
-      console.log(athlete.runMarathon());
+      // console.log(athlete.runMarathon());
+      return athlete.runMarathon();
     }
 
     //exercise
     function exercise() {
-      console.log(athlete.exercise());
+      return athlete.exercise();
+      // console.log(athlete.exercise());
     }
 
     //do calculation
-    form.marathonRunning.checked === true ? runMarathon() : exercise();
+    form.marathonRunning.checked === true
+      ? displayCalculationResults(runMarathon())
+      : displayCalculationResults(exercise());
+  }
+
+  //Set attribute "enable" to saveButton
+  function activateButtonStore() {
+    saveButton.disabled = false;
   }
 
   //Store data
   function storeData() {
-    console.log('Storing the data...');
+    console.log(' Storing the data...');
   }
 
-  //Clear data
+  //Clear&reset data
   function resetForm() {
     form.querySelectorAll('input').forEach(field => {
       switch (field.id) {

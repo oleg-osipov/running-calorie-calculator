@@ -43,18 +43,20 @@ module.exports = {
           {
             loader: 'svg-sprite-loader',
             options: {
-              publicPath: './app'
+              publicPath: ''
             }
           },
-          {
-            loader: 'svgo-loader',
-            options: {
-              plugins: [{ cleanupIDs: false }]
-            }
-          }
+          { loader: 'svgo-loader' }
         ]
       }
     ]
   },
-  plugins: [new SpriteLoaderPlugin()]
+  plugins: [
+    new SpriteLoaderPlugin({
+      plainSprite: true,
+      spriteAttrs: {
+        id: 'icon_sprite'
+      }
+    })
+  ]
 };

@@ -1,7 +1,23 @@
+// --breakpoint-xs: 0;
+// --breakpoint-sm: 576px;
+// --breakpoint-md: 768px;
+// --breakpoint-lg: 992px;
+// --breakpoint-xl: 1200px;
+
 body {
   width: 100%;
   color: $f-color-main;
   background-color: $c-grey;
+  margin: 0 auto;
+  font-size: 16px;
+  @include poly-fluid-sizing(
+    'font-size',
+    (
+      576px: 15px,
+      768px: 16px,
+      1200px: 17px
+    )
+  );
 }
 
 .hero {
@@ -65,11 +81,6 @@ body {
     width: 4rem;
     margin: 0;
   }
-
-  // input ~ span,
-  // input ~ div {
-  //   cursor: default;
-  // }
 }
 
 //error-message container
@@ -96,6 +107,14 @@ div[class^='container--'] {
   padding: 3rem 0;
 }
 
+//INFORMATION_SECTION
+.information-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-bottom: 50rem;
+}
+
 //Style icons
 .icon {
   display: inline-block;
@@ -113,6 +132,11 @@ Single-colored icons can be modified like so:
   color: red;
 }
 ========================================== */
+//hide webpack uploaded svg-sprite
+//just in case
+#icon_sprite {
+  display: none;
+}
 
 .icon-cogs {
   width: 1.0712890625em;

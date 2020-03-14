@@ -1,10 +1,18 @@
 //card
 .neumorphic-card {
-  padding: 2.5rem;
-  box-shadow: 0.8rem 1rem 2.4rem $c-grey-darker-7,
-    -0.8rem -0.8rem 2.4rem $c-grey-lighter-8,
-    -0.2rem -0.2rem 0.2rem $c-grey-lighter-8;
+  //padding: 2.5rem;
+  @include card;
   border-radius: 2rem;
+
+  padding: 30px;
+  @include poly-fluid-sizing(
+    'padding',
+    (
+      576px: 32px,
+      768px: 36px,
+      992px: 42px
+    )
+  );
 }
 
 //inputs
@@ -22,6 +30,16 @@
   outline: none;
   color: $f-color-main-darker;
   text-align: center;
+
+  margin-left: 3px;
+  @include poly-fluid-sizing(
+    'margin-left',
+    (
+      576px: 3px,
+      768px: 5px,
+      992px: 8px
+    )
+  );
 }
 
 //highlight input filds that contain invalid values
@@ -118,9 +136,13 @@
     @include transition;
   }
 
-  //push button
-  &:active,
+  //prevent showing outline
   &:focus {
+    outline: none;
+  }
+  //push button
+  &:active {
+    outline: none;
     background: linear-gradient(to top, $c-grey-darker-5, $c-grey-lighter-5);
     box-shadow: inset 0.2rem 0.2rem 0.8rem $c-grey-darker-20,
       inset 0.8rem 0.8rem 1.6rem $c-grey-darker-15,
@@ -200,12 +222,24 @@
   }
 }
 
-//genders
+//genders txt
 .gender {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   &--male,
   &--female {
     cursor: default;
-    font-size: 1.3rem;
+    font-size: 16px;
+    @include poly-fluid-sizing(
+      'font-size',
+      (
+        576px: 16px,
+        768px: 18px,
+        1200px: 20px
+      )
+    );
     width: 5rem;
     display: flex;
     align-items: center;
@@ -214,22 +248,53 @@
   }
 
   &--male {
-    margin-right: 1.2rem;
+    margin-right: 10px;
+    @include poly-fluid-sizing(
+      'margin-right',
+      (
+        576px: 10px,
+        768px: 15px,
+        1200px: 22px
+      )
+    );
   }
   &--female {
-    margin-left: 1.2rem;
+    margin-left: 10px;
+    @include poly-fluid-sizing(
+      'margin-left',
+      (
+        576px: 10px,
+        768px: 15px,
+        1200px: 22px
+      )
+    );
   }
 
   //gender symbols - mars$venus
   &--symbol {
-    fill: #595a5c;
-    transition: fill 0.1s linear;
-
-    &.female {
-      position: absolute;
-      right: -0.5rem;
+    &.icon {
+      display: block;
+      fill: #595a5c;
+      height: 1em;
+      width: 1em;
+      transition: fill 0.1s linear;
+      @include poly-fluid-sizing(
+        'height',
+        (
+          576px: 20px,
+          768px: 22px,
+          1200px: 24px
+        )
+      );
+      @include poly-fluid-sizing(
+        'width',
+        (
+          576px: 20px,
+          768px: 22px,
+          1200px: 24px
+        )
+      );
     }
-
     &.active {
       fill: $red;
       transition: fill 0.1s linear;
@@ -241,6 +306,7 @@
 .slider-container {
   max-width: 28rem;
   width: 100%;
+  flex-direction: column;
 }
 
 //resetting default styles
@@ -399,7 +465,7 @@ input[type='range']::-ms-track {
   &:checked:hover {
     background: transparent;
   }
-  &:checked + .check-icon svg path {
+  &:checked + .check-icon svg {
     fill: transparentize($red, 0.1);
   }
 }
@@ -419,10 +485,8 @@ input[type='range']::-ms-track {
   svg {
     width: 1rem; //--------------//var here
     height: 1rem;
-    path {
-      fill: transparent;
-      transition: fill 0.15s ease-in;
-    }
+    fill: transparent;
+    transition: fill 0.15s ease-in;
   }
 }
 
@@ -478,6 +542,69 @@ input[type='range']::-ms-track {
   transition: all 0.15s ease-in;
 }
 
+//NEUMORPHIC-INFO-CARD
+.neumorphic-info-card {
+  margin-top: 2rem;
+  @include card;
+  border-radius: 2rem;
+  padding: 1.2rem;
+  font-size: 1rem;
+
+  // div[class*='container--'] {
+  // }
+  .icon-container,
+  .data-container {
+    width: 100%;
+    flex-basis: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .icon-container {
+    height: 4rem;
+    //border: solid 1px seagreen;
+    font-size: 200%;
+    i {
+      display: flex;
+      align-items: center;
+
+      svg {
+        transform: scale(1.5);
+      }
+    }
+  }
+
+  .data-container {
+    height: 6rem;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .data-name,
+    .data-unit {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .data-unit {
+      font-size: 150%;
+      font-weight: 600;
+      height: 50%;
+      // border: solid 1px rgb(15, 5, 105);
+    }
+    .data-name {
+      height: 50%;
+      //border: solid 1px rgb(88, 26, 70);
+      text-align: center;
+
+      p {
+        margin: 0;
+      }
+    }
+  }
+}
+
 //MEDIAQUERIES
 
 @include media-breakpoint-up(sm) {
@@ -493,5 +620,23 @@ input[type='range']::-ms-track {
   .button-container {
     flex-basis: 33.333%;
     margin-top: 0;
+  }
+
+  .neumorphic-info-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    .icon-container {
+      height: 5rem;
+      width: 25%;
+      flex-basis: 25%;
+    }
+    .data-container {
+      height: 5rem;
+      width: 75%;
+      flex-basis: 75%;
+    }
   }
 }
