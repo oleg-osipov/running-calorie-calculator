@@ -1,9 +1,0 @@
-/node_modules
-/.babelrc
-/package-lock.json
-/package.json
-/src
-/webpack.common.js
-/webpack.prod.js
-/webpack.dev.js
-/.gitignore
