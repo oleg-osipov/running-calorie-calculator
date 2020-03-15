@@ -23,15 +23,78 @@ body {
 .hero {
   margin-left: auto;
   margin-right: auto;
-}
-
-.hero-title {
-  width: 100%;
   display: flex;
-  justify-content: center;
   align-items: center;
-  height: 8rem;
-  max-height: 8rem;
+  justify-content: center;
+
+  &-icon-container,
+  &-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 6.5rem;
+    max-height: 6.5rem;
+  }
+
+  &-icon-container {
+    width: 35%;
+    flex-basis: 35%;
+    i {
+      svg {
+        transform: scale(2.5);
+
+        @include media-breakpoint-up(md) {
+          transform: scale(3);
+        }
+
+        @include media-breakpoint-up(lg) {
+          transform: scale(3.5);
+        }
+      }
+    }
+  }
+
+  &-title {
+    width: 65%;
+    flex-basis: 65%;
+
+    h1 {
+      font-size: 28px;
+      @include poly-fluid-sizing(
+        'font-size',
+        (
+          576px: 28px,
+          768px: 32px,
+          992px: 36px,
+          1200px: 45px
+        )
+      );
+    }
+  }
+
+  @include media-breakpoint-up(md) {
+    &-icon-container {
+      width: 25%;
+      flex-basis: 25%;
+    }
+
+    &-title {
+      width: 75%;
+      flex-basis: 75%;
+    }
+  }
+
+  @include media-breakpoint-up(lg) {
+    &-icon-container {
+      width: 15%;
+      flex-basis: 15%;
+    }
+
+    &-title {
+      width: 80%;
+      flex-basis: 80%;
+    }
+  }
 }
 
 .data-section {
