@@ -3,6 +3,7 @@
   //padding: 2.5rem;
   @include card;
   border-radius: 2rem;
+  overflow: hidden;
 
   padding: 30px;
   @include poly-fluid-sizing(
@@ -539,8 +540,9 @@ input[type='range']::-ms-track {
 [data-title]:after {
   content: attr(data-title);
   position: absolute;
-  top: -110%;
-  left: 100%;
+  top: -130%;
+  left: 50%;
+  transform: translateX(-50%);
   background-color: $c-grey-lighter-8;
   padding: 2px 5px;
   white-space: nowrap;
@@ -561,6 +563,14 @@ input[type='range']::-ms-track {
   visibility: visible;
   opacity: 1;
   transition: all 0.15s ease-in;
+}
+
+//ajusting pseudo-tooltip
+.met-abbreviation-definition:after {
+  transform: translateX(-20%);
+}
+.met-abbreviation-formula:after {
+  transform: translateX(-65%);
 }
 
 //NEUMORPHIC-INFO-CARD
