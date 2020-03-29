@@ -1,6 +1,4 @@
 export function displayCalculationResults(data) {
-  console.log(data);
-
   //Information Section
   let informationSection = document.querySelector('.information-section');
 
@@ -98,4 +96,5 @@ export function displayCalculationResults(data) {
     //Append InfoCardContainer into document
     informationSection.appendChild(infoCardContainer);
   }
+  return data;
 }

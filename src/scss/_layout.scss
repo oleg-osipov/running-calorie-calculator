@@ -1,9 +1,3 @@
-// --breakpoint-xs: 0;
-// --breakpoint-sm: 576px;
-// --breakpoint-md: 768px;
-// --breakpoint-lg: 992px;
-// --breakpoint-xl: 1200px;
-
 body {
   width: 100%;
   color: $f-color-main;
@@ -175,7 +169,102 @@ div[class^='container--'] {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  padding-bottom: 50rem;
+}
+.information-section {
+  margin-bottom: 5rem;
+}
+
+//CALCULATED RESULTS
+.calculated-results-saved {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin-bottom: 2rem;
+}
+
+.neumorphic-list {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1rem;
+  justify-content: center;
+  text-align: center;
+  @include card;
+  border-radius: 1.5rem;
+}
+.record-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $c-grey;
+  padding: 0 5px;
+  @include record;
+
+  i {
+    width: 10%;
+    //height: 100%;
+    @include media-breakpoint-up(sm) {
+      width: 5%;
+    }
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    svg {
+      transform: scale(1.1);
+      position: relative;
+      use {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    svg:hover,
+    svg:focus,
+    svg:active {
+      fill: $red;
+    }
+  }
+}
+
+.neumorphic-record {
+  margin-bottom: 5px;
+  padding: 5px 0;
+  width: 90%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  @include media-breakpoint-up(sm) {
+    width: 95%;
+  }
+
+  p {
+    display: flex;
+    width: 100%;
+    flex-basis: 100%;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    margin: 0;
+    padding: 5px;
+    position: relative;
+    line-height: 1.5;
+    @include media-breakpoint-up(sm) {
+      flex-basis: 50%;
+    }
+    @include media-breakpoint-up(lg) {
+      flex-basis: 25%;
+    }
+  }
+}
+
+.neumorphic-record:last-of-type {
+  margin-bottom: 0;
 }
 
 //Style icons

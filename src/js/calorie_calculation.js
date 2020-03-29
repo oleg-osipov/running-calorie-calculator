@@ -9,6 +9,12 @@ export default function processData() {
   const clearButton = document.getElementById('clearButton');
 
   const validateForm = validateInputData();
+  let calculationResult = '';
+
+  //EventListener on load
+  document.addEventListener('DOMContentLoaded', event => {
+    LocalStorage.showData();
+  });
 
   //FORM EVENT HANDLER
   form.addEventListener('click', event => {
@@ -18,15 +24,17 @@ export default function processData() {
     switch (event.target.id) {
       case calculateButton.id: {
         if (validateForm() === true) {
-          calculateCalories();
+          calculationResult = calculateCalories();
           activateButtonStore();
-          // displayCalculationResults();
+          scrollIntoView(document.querySelector('.information-section'));
         }
         break;
       }
       case saveButton.id: {
         if (validateForm() === true) {
-          storeData();
+          LocalStorage.addData(calculationResult);
+          LocalStorage.showData();
+          // scrollIntoView(document.querySelector('.information-section'));
         }
         break;
       }
@@ -37,7 +45,7 @@ export default function processData() {
     }
   });
 
-  class Person {
+  class Runner {
     constructor(
       gender,
       age,
@@ -125,7 +133,6 @@ export default function processData() {
 
       //Estimated time
       let estimatedTime = (marathonDistanceKm / marathonAverageSpeed) * 60;
-      console.log(estimatedTime.toFixed(2) + ' min');
 
       //Estimated total MET value
       let estimatedTotalMETvalueMarathon =
@@ -162,7 +169,6 @@ export default function processData() {
     switch (form.gendersToggleCheckbox.checked) {
       case true: {
         //MEN
-        console.log(' men');
         value1 = 88.362;
         value2 = 13.397;
         value3 = 4.799;
@@ -171,7 +177,6 @@ export default function processData() {
       }
       case false: {
         //WOMEN
-        console.log(' women');
         value1 = 447.593;
         value2 = 9.247;
         value3 = 3.098;
@@ -180,7 +185,7 @@ export default function processData() {
       }
     }
 
-    const athlete = new Person(
+    const athlete = new Runner(
       form.gendersToggleCheckbox.checked,
       form.age.value,
       form.height.value,
@@ -194,22 +199,12 @@ export default function processData() {
       value4
     );
 
-    //Run the footrace
-    function runMarathon() {
-      // console.log(athlete.runMarathon());
-      return athlete.runMarathon();
-    }
-
-    //exercise
-    function exercise() {
-      return athlete.exercise();
-      // console.log(athlete.exercise());
-    }
-
     //do calculation
     form.marathonRunning.checked === true
-      ? displayCalculationResults(runMarathon())
-      : displayCalculationResults(exercise());
+      ? (calculationResult = athlete.runMarathon())
+      : (calculationResult = athlete.exercise());
+
+    return displayCalculationResults(calculationResult);
   }
 
   //Set attribute "enable" to saveButton
@@ -217,9 +212,128 @@ export default function processData() {
     saveButton.disabled = false;
   }
 
-  //Store data
-  function storeData() {
-    console.log(' Storing the data...');
+  class LocalStorage {
+    static getData() {
+      let records;
+      if (localStorage.getItem('record') === null) {
+        records = [];
+      } else {
+        records = JSON.parse(localStorage.getItem('record'));
+      }
+      return records;
+    }
+
+    static showData() {
+      const records = LocalStorage.getData();
+      const calcResults = document.querySelector('.calculated-results-saved');
+
+      //clear all data
+      while (calcResults.firstChild) {
+        calcResults.removeChild(calcResults.firstChild);
+      }
+
+      //hide  container if localStorage is empty
+      if (Array.isArray(records) && !records.length) {
+        calcResults.style.visibility = 'hidden';
+      } else {
+        calcResults.style.visibility = 'visible';
+      }
+
+      //list of records - container
+      const listOfElements = document.createElement('div');
+      listOfElements.className = 'list neumorphic-list';
+
+      let dataItems = '';
+      //Info item
+      records.forEach(record => {
+        for (const [key, value] of Object.entries(record)) {
+          dataItems += `<p>${key}: ${value};`;
+        }
+
+        //record container
+        const recordContainer = document.createElement('div');
+        recordContainer.className = 'record-container';
+
+        const recordElement = document.createElement('div');
+        recordElement.className = 'record neumorphic-record';
+
+        //SVG icon
+        const deleteIcon = document.createElement('i');
+        deleteIcon.id = 'deleteRecord';
+        //Create svg element
+        const svgElement = document.createElementNS(
+          'http://www.w3.org/2000/svg',
+          'svg'
+        );
+        svgElement.classList.add('icon');
+
+        const useElem = document.createElementNS(
+          'http://www.w3.org/2000/svg',
+          'use'
+        );
+
+        //The id of the symbol element in svg-sprite file is the same as the value for xlink:href
+        useElem.setAttributeNS(
+          'http://www.w3.org/1999/xlink',
+          'xlink:href',
+          `#icon_sprite_icon-trash-bin`
+        );
+        svgElement.appendChild(useElem);
+        deleteIcon.appendChild(svgElement);
+
+        recordElement.innerHTML = dataItems;
+        //recordElement.appendChild(deleteIcon);
+
+        recordContainer.appendChild(recordElement);
+        recordContainer.appendChild(deleteIcon);
+
+        //reset variable for next record
+        dataItems = '';
+
+        listOfElements.appendChild(recordContainer);
+      });
+
+      calcResults.appendChild(listOfElements);
+
+      //Add evenrListener on dataList
+      calcResults.querySelectorAll('.icon').forEach((elem, index) => {
+        elem.addEventListener('click', event => {
+          if (
+            event.target === elem ||
+            event.target === elem.firstElementChild
+          ) {
+            LocalStorage.deleteData(index, elem.parentElement.parentElement);
+          } else {
+            console.log('Somthing went wrong...');
+          }
+        });
+      });
+    }
+
+    static addData(newRecord) {
+      const records = LocalStorage.getData();
+      if (!records.length) {
+        records.push(newRecord);
+      } else {
+        records.forEach((record, index, records) => {
+          if (JSON.stringify(record) === JSON.stringify(newRecord)) {
+            records.splice(index, 1);
+            return records;
+          }
+        });
+        records.push(newRecord);
+      }
+
+      localStorage.setItem('record', JSON.stringify(records));
+    }
+
+    static deleteData(index, record) {
+      const records = LocalStorage.getData();
+      record.remove();
+      records.splice(index, 1);
+
+      localStorage.setItem('record', JSON.stringify(records));
+    }
   }
 
   //Clear&reset data
@@ -274,6 +388,14 @@ export default function processData() {
           rangeSliderInstance();
         }
       }
+    });
+  }
+
+  function scrollIntoView(element) {
+    // Scroll into view
+    element.scrollIntoView({
+      block: 'center',
+      behavior: 'smooth'
     });
   }
 }

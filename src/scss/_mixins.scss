@@ -47,6 +47,14 @@
     -0.2rem -0.2rem 0.2rem $c-grey-lighter-8;
 }
 
+//saved calculated results
+
+@mixin record {
+  border-radius: 2px;
+  // background: #e0e3e7;
+  box-shadow: 2px 2px 8px #dee2e6, -2px -2px 8px #dee2e6;
+}
+
 //*FLUID SIZING*//
 /// poly-fluid-sizing
 /// Generate linear interpolated size values through multiple break points

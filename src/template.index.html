@@ -28,7 +28,7 @@
             <div class="col-lg-6">
               <div class="section--body-parameters neumorphic-card">
                 <div class="data-unit">
-                  <div class="gender neumorphic-toggle-switch--container" data-title='Please choose your sex'>
+                  <div class="gender neumorphic-toggle-switch--container" >
                     <div class="gender--male">
                       <svg class="icon gender--symbol male" id="mars">
                         <use xlink:href="#icon_sprite_icon-mars"></use>
@@ -113,7 +113,7 @@
                       id="metValue"
                       class="neumorphic-input-field required"
                       name="MET-value"
-                      type="text"
+                      type="digits"
                       maxlength="4"
                       />
                     <span class="metric-unit"
@@ -129,7 +129,7 @@
                       id="duration"
                       class="neumorphic-input-field required"
                       name="duration"
-                      type="text"
+                      type="digits"
                       maxlength="3"
                       />
                     <span class="metric-unit">min</span>
@@ -195,34 +195,8 @@
           </div>
        </form>
        <div class="information-section row">
-         <!-- <div class="col-6 col-xl-3 container--bmr">
-           <div class="neumorphic-info-card bmr">
-              <div class="icon-container">
-                <i>
-                  <svg class="icon">
-                    <use xlink:href="#icon_sprite_icon-floppy-save"></use>
-                  </svg>
-                </i>
-              </div>
-              <div class="data-container">
-               <div class="data-unit">
-                 <span>19.8km</span>
-               </div>
-               <div class="data-name">
-                 <p>Estimated distance</p>
-               </div>
-             </div>
-           </div>
-         </div>
-         <div class="col-6 col-xl-3 container--distance-time">
-           <div class="neumorphic-info-card distance-time"></div>
-         </div>
-         <div class="col-6 col-xl-3 container--met">
-            <div class="neumorphic-info-card met"></div>
-         </div>
-         <div class="col-6 col-xl-3 container--energie">
-            <div class="neumorphic-info-card energie"></div>
-         </div> -->
+       </div>
+       <div class="calculated-results-saved row" id="resultsList">
        </div>
       </main>
     </div>
