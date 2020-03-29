@@ -1,7 +1,11 @@
 /node_modules
 /.babelrc
 /package-lock.json
-# /package.json
-# /webpack.common.js
-# /webpack.prod.js
-# /webpack.dev.js
+/app
+/src
+/app
+/app
+/package.json
+/webpack.common.js
+/webpack.prod.js
+/webpack.dev.js
